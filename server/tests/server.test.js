@@ -38,10 +38,7 @@ describe('POST /todos', ()=>{
         request(app)
             .post('/todos')
             .send({text})
-            .expect(400)
-            // .expect((res)=>{
-            //     expect(res.body.text).toBe(text);
-            // })
+            .expect(400)         
             .end((err,res)=>{
                 if(err){
                     return done(err);
@@ -49,7 +46,6 @@ describe('POST /todos', ()=>{
 
                 Todo.find().then((todos)=>{
                     expect(todos.length).toBe(0);
-                    //expect(todos[0].text).toBe(text);
                     done();
                 }).catch((e)=> done(e));
             });

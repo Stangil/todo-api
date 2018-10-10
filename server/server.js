@@ -1,3 +1,5 @@
+require('./config/config');
+
 const _ = require('lodash');
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -8,7 +10,7 @@ var {Todo} = require('./models/todo');
 var {User} = require('./models/user');
 
 var app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT;
 
 app.use(bodyParser.json());
 
@@ -64,7 +66,8 @@ app.delete('/todos/:id',(req,res)=>{
 });
 
 app.patch('/todos/:id',(req,res)=>{
-    var id = req.param.id;
+    var id = req.params.id;
+    console.log
     var body = _.pick(req.body, ['text','completed']);//limiting to these values, what the user can update
     
     if(!ObjectID.isValid(id)){
